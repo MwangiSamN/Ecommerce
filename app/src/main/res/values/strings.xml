@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Waxing Beans Kenya</string>
+    <string name="product_name_1">100g Wax Beans</string>
+    <string name="product_name_2">300g Wax Beans</string>
+    <string name="product_name_3">500g Wax Beans</string>
+    <string name="product_price_1">Kshs 600</string>
+    <string name="product_price_2">Kshs 1,300</string>
+    <string name="product_price_3">Kshs 2,000</string>
+</resources>
