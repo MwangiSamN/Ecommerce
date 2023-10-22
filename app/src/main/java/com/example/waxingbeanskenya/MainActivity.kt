@@ -6,24 +6,25 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.AlertDialogDefaults.shape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -33,11 +34,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.waxingbeanskenya.data.Product
@@ -76,7 +77,7 @@ fun WaxingBeansApp() {
             items(products){
                 ProductItem(
                     product = it,
-                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))
+                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
                 )
             }
         }
@@ -111,28 +112,31 @@ fun ProductItem(
 ){
     Card(
         modifier = modifier
-            .size(width = 150.dp, height = 200.dp),
+            .size(width = 150.dp, height = 250.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
     ) {
-        Column(
-
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
+
+            Column {
+
+                ProductImage(
+                    productImage = product.imageResourceId
+                )
+                ProductInfo(
+                    productName = product.name,
+                    productPrice = product.price
+                )
+            }
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(dimensionResource(id = R.dimen.padding_small))
+                horizontalArrangement = Arrangement.End
             ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    ProductImage(
-                        productImage = product.imageResourceId
-                    )
-                    ProductInfo(
-                        productName = product.name,
-                        productPrice = product.price
-                    )
-                }
+                FavouriteIcon()
             }
         }
+
     }
 }
 
@@ -141,14 +145,19 @@ fun ProductImage(
     @DrawableRes productImage: Int,
     modifier: Modifier = Modifier
 ) {
-    Image(
-        modifier = Modifier
-            .size(dimensionResource(id = R.dimen.image_size))
-            .padding(dimensionResource(id = R.dimen.padding_small))
-            .clip(MaterialTheme.shapes.medium),,
-        contentScale = ContentScale.FillWidth,
-        painter = painterResource(productImage),
-        contentDescription = null)
+    Row(modifier = modifier) {
+        Box {
+            Image(
+                modifier = Modifier
+                    .size(width = 180.dp, height = 180.dp)
+                    .padding(dimensionResource(id = R.dimen.padding_small))
+                    .clip(MaterialTheme.shapes.medium),
+                contentScale = ContentScale.FillWidth,
+                painter = painterResource(productImage),
+                contentDescription = null
+            )
+        }
+    }
 }
 
 @Composable
@@ -158,15 +167,32 @@ fun ProductInfo(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
+        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_small))
     ) {
         Text(
             text = stringResource(productName),
-            style = MaterialTheme.typography.labelLarge
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold
         )
         Text(
             text = stringResource(productPrice),
-            style = MaterialTheme.typography.labelMedium
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+
+    }
+}
+
+@Composable
+fun FavouriteIcon() {
+    IconButton(
+        onClick = { /*TODO*/ }
+    ) {
+        Icon(
+            imageVector = Icons.Filled.FavoriteBorder,
+            contentDescription = null
         )
     }
 }
