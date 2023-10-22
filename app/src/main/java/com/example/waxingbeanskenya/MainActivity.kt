@@ -18,7 +18,13 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.List
+import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -26,14 +32,21 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -67,6 +80,9 @@ fun WaxingBeansApp() {
     Scaffold(
         topBar = {
             WaxingTopBar()
+        },
+        bottomBar = {
+            WaxingNavigationBar()
         }
     ) {
         it ->
@@ -81,6 +97,7 @@ fun WaxingBeansApp() {
                 )
             }
         }
+        WaxingNavigationBar()
     }
 }
 
@@ -187,6 +204,7 @@ fun ProductInfo(
 
 @Composable
 fun FavouriteIcon() {
+
     IconButton(
         onClick = { /*TODO*/ }
     ) {
@@ -195,6 +213,57 @@ fun FavouriteIcon() {
             contentDescription = null
         )
     }
+}
+
+data class BottomNavigationItem(
+    val title: String,
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector
+)
+
+@Composable
+fun WaxingNavigationBar(){
+    var selectedItemIndex by rememberSaveable { mutableStateOf(0) }
+    
+
+    val items = listOf(
+        BottomNavigationItem(
+            title = "Shop",
+            selectedIcon = Icons.Filled.ShoppingCart,
+            unselectedIcon = Icons.Outlined.ShoppingCart
+        ),
+        BottomNavigationItem(
+            title = "Category",
+            selectedIcon = Icons.Filled.List,
+            unselectedIcon = Icons.Outlined.List
+        ),
+        BottomNavigationItem(
+            title = "My Account",
+            selectedIcon = Icons.Filled.AccountCircle,
+            unselectedIcon = Icons.Outlined.AccountCircle
+        )
+    )
+
+    NavigationBar {
+        items.forEachIndexed { index, item ->
+            NavigationBarItem(
+                selected = selectedItemIndex == index,
+                onClick = { selectedItemIndex = index },
+                label = { Text(item.title) },
+                icon = {
+                    Icon(
+                        imageVector =
+                        if (index == selectedItemIndex){
+                                                  item.selectedIcon
+                                                  } else{
+                                                        item.unselectedIcon
+                                                        },
+                        contentDescription = item.title)
+                }
+            )
+        }
+    }
+
 }
 
 @Preview
