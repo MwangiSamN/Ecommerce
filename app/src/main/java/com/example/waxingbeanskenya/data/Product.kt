@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import com.example.waxingbeanskenya.R
 
 data class Product(
+    val id: Int,
     @DrawableRes val imageResourceId: Int,
     @StringRes val name: Int,
     @StringRes val price: Int
@@ -12,82 +13,98 @@ data class Product(
 
 val products = listOf(
     Product(
-        R.drawable.waxbeans,
+        1,
+        R.drawable.rose100,
         R.string.product_name_1,
         R.string.product_price_1
     ),
     Product(
-        R.drawable.waxbeans,
+        2,
+        R.drawable.rose100,
         R.string.product_name_2,
         R.string.product_price_2
     ),
     Product(
-        R.drawable.waxbeans,
+        2,
+        R.drawable.rose100,
         R.string.product_name_3,
         R.string.product_price_3
     ),
     Product(
-        R.drawable.waxbeans,
+        4,
+        R.drawable.rose100,
         R.string.product_name_1,
         R.string.product_price_1
     ),
     Product(
-        R.drawable.waxbeans,
+        5,
+        R.drawable.rose100,
         R.string.product_name_2,
         R.string.product_price_2
     ),
     Product(
-        R.drawable.waxbeans,
+        6,
+        R.drawable.rose100,
         R.string.product_name_3,
         R.string.product_price_3
     ),
     Product(
-        R.drawable.waxbeans,
+        7,
+        R.drawable.rose100,
         R.string.product_name_1,
         R.string.product_price_1
     ),
     Product(
-        R.drawable.waxbeans,
+        8,
+        R.drawable.rose100,
         R.string.product_name_2,
         R.string.product_price_2
     ),
     Product(
-        R.drawable.waxbeans,
+        9,
+        R.drawable.rose100,
         R.string.product_name_3,
         R.string.product_price_3
     ),
     Product(
-        R.drawable.waxbeans,
+        10,
+        R.drawable.rose100,
         R.string.product_name_3,
         R.string.product_price_3
     ),
     Product(
-        R.drawable.waxbeans,
+        11,
+        R.drawable.rose100,
         R.string.product_name_1,
         R.string.product_price_1
     ),
     Product(
-        R.drawable.waxbeans,
+        12,
+        R.drawable.rose100,
         R.string.product_name_2,
         R.string.product_price_2
     ),
     Product(
-        R.drawable.waxbeans,
+        13,
+        R.drawable.rose100,
         R.string.product_name_3,
         R.string.product_price_3
     ),
     Product(
-        R.drawable.waxbeans,
+        14,
+        R.drawable.rose100,
         R.string.product_name_1,
         R.string.product_price_1
     ),
     Product(
-        R.drawable.waxbeans,
+        15,
+        R.drawable.rose100,
         R.string.product_name_2,
         R.string.product_price_2
     ),
     Product(
-        R.drawable.waxbeans,
+        16,
+        R.drawable.rose100,
         R.string.product_name_3,
         R.string.product_price_3
     )

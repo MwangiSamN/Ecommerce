@@ -3,6 +3,7 @@ package com.example.waxingbeanskenya.ui
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -45,11 +46,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.waxingbeanskenya.R
 import com.example.waxingbeanskenya.WaxingBeansApp
 import com.example.waxingbeanskenya.data.Product
-import com.example.waxingbeanskenya.navigation.Navigation
+import com.example.waxingbeanskenya.navigation.Screen
 import com.example.waxingbeanskenya.ui.theme.WaxingBeansKenyaTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -73,16 +75,18 @@ fun WaxingTopBar(modifier: Modifier = Modifier) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductItem(
+    navController: NavController,
     modifier: Modifier = Modifier,
     product: Product
 ){
     Card(
-        onClick = {},
         modifier = modifier
-            .size(width = 150.dp, height = 250.dp),
+            .size(width = 150.dp, height = 250.dp)
+            .clickable {
+                       navController.navigate(route = Screen.ProductDetail.route)
+            },
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
     ) {
         Row(
@@ -133,8 +137,7 @@ fun ProductImage(
 @Composable
 fun ProductInfo(
     @StringRes productName: Int,
-    @StringRes productPrice: Int,
-    modifier: Modifier = Modifier
+    @StringRes productPrice: Int
 ) {
     Column(
         modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_small))
@@ -224,7 +227,7 @@ fun WaxingNavigationBar(){
 @Composable
 fun WaxingShopPreview() {
     WaxingBeansKenyaTheme(darkTheme = false) {
-        WaxingBeansApp()
+        WaxingBeansApp(navController = rememberNavController())
     }
 }
 
@@ -232,6 +235,6 @@ fun WaxingShopPreview() {
 @Composable
 fun WaxingDarkThemePreview() {
     WaxingBeansKenyaTheme(darkTheme = true) {
-        WaxingBeansApp()
+        WaxingBeansApp(navController = rememberNavController())
     }
 }

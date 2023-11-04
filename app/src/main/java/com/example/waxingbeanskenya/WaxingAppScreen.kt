@@ -1,6 +1,5 @@
 package com.example.waxingbeanskenya
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -10,7 +9,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.waxingbeanskenya.data.products
+import com.example.waxingbeanskenya.navigation.SetupNavGraph
 import com.example.waxingbeanskenya.ui.ProductItem
 import com.example.waxingbeanskenya.ui.WaxingNavigationBar
 import com.example.waxingbeanskenya.ui.WaxingTopBar
@@ -18,7 +21,9 @@ import com.example.waxingbeanskenya.ui.WaxingTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WaxingBeansApp() {
+fun WaxingBeansApp(
+    navController: NavController
+) {
 
     Scaffold(
         topBar = {
@@ -35,15 +40,16 @@ fun WaxingBeansApp() {
         ) {
             items(products){
                 ProductItem(
+                    navController = navController,
                     product = it,
-                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
+                    modifier = Modifier
+                        .padding(dimensionResource(id = R.dimen.padding_small))
+
                 )
             }
         }
 
-
-
-
     }
+
 }
 

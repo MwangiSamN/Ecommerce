@@ -1,6 +1,6 @@
 package com.example.waxingbeanskenya.navigation
 
-sealed class Screen (val route: String){
-    object WaxingShopScreen: Screen("home_screen")
-    object ProductDetailsScreen: Screen("product_details_screen")
+sealed class Screen(val route: String){
+    object WaxingShop: Screen(route = "waxing_shop_screen")
+    object ProductDetail: Screen(route = "product_detail_screen")
 }

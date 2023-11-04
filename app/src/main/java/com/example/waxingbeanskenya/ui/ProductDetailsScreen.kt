@@ -1,6 +1,5 @@
 package com.example.waxingbeanskenya.ui
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,7 +23,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.KeyboardArrowLeft
 import androidx.compose.material.icons.outlined.ShoppingCart
@@ -33,7 +31,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -44,7 +41,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -55,16 +51,20 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.waxingbeanskenya.R
+import com.example.waxingbeanskenya.navigation.Screen
 import com.example.waxingbeanskenya.ui.theme.WaxingBeansKenyaTheme
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun ProductDetailPage(){
+fun ProductDetailPage(
+    navController: NavController
+) {
     Scaffold(
         topBar = {
-            TopAppBarProduct()
+            TopAppBarProduct(navController = navController)
         },
 
         floatingActionButton = {
@@ -90,7 +90,6 @@ fun ProductDetailPage(){
                     ProductImageCarousel()
                 }
                 Surface(
-                    color = Color.LightGray,
                     shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),
                     modifier = Modifier
                         .fillMaxSize()
@@ -106,7 +105,6 @@ fun ProductDetailPage(){
                         ProductSize()
                         ProductColours()
                         ProductDescription()
-                        Spacer(modifier = Modifier.height(400.dp))
                     }
                 }
             }
@@ -117,7 +115,9 @@ fun ProductDetailPage(){
 }
 
 @Composable
-fun TopAppBarProduct(){
+fun TopAppBarProduct(
+    navController: NavController
+){
     Row(
         modifier = Modifier
             .fillMaxSize()
@@ -131,7 +131,13 @@ fun TopAppBarProduct(){
             shape = RoundedCornerShape(12.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = {
+                navController.navigate(route = Screen.WaxingShop.route){
+                    popUpTo(route = Screen.WaxingShop.route){
+                        inclusive = true
+                    }
+                }
+            }) {
                 androidx.compose.material3.Icon(
                     imageVector = Icons.Outlined.KeyboardArrowLeft,
                     contentDescription = null
@@ -384,6 +390,6 @@ fun ProductDescription(){
 @Composable
 fun ProductDetailsPreview(){
     WaxingBeansKenyaTheme {
-        ProductDetailPage()
+        ProductDetailPage(navController = rememberNavController())
     }
 }
