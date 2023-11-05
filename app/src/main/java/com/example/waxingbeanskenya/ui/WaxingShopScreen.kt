@@ -8,9 +8,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -83,18 +87,20 @@ fun ProductItem(
 ){
     Card(
         modifier = modifier
-            .size(width = 150.dp, height = 250.dp)
+            .fillMaxWidth()
+            .height(300.dp)
             .clickable {
-                       navController.navigate(route = Screen.ProductDetail.route)
-            },
+                navController.navigate(route = Screen.ProductDetail.route)
+            }
+            .verticalScroll(rememberScrollState()),
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
         ) {
 
-            Column {
+            Column() {
 
                 ProductImage(
                     productImage = product.imageResourceId
@@ -103,11 +109,6 @@ fun ProductItem(
                     productName = product.name,
                     productPrice = product.price
                 )
-            }
-            Row(
-                horizontalArrangement = Arrangement.End
-            ) {
-                FavouriteIcon()
             }
         }
 
@@ -123,10 +124,10 @@ fun ProductImage(
         Box {
             Image(
                 modifier = Modifier
-                    .size(width = 180.dp, height = 180.dp)
+                    .height(220.dp)
                     .padding(dimensionResource(id = R.dimen.padding_small))
                     .clip(MaterialTheme.shapes.medium),
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.Crop,
                 painter = painterResource(productImage),
                 contentDescription = null
             )
@@ -139,35 +140,35 @@ fun ProductInfo(
     @StringRes productName: Int,
     @StringRes productPrice: Int
 ) {
-    Column(
-        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_small))
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = stringResource(productName),
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold
-        )
-        Text(
-            text = stringResource(productPrice),
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
-        )
+        Column(
+            modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_small))
+        ) {
+            Text(
+                text = stringResource(productName),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = stringResource(productPrice),
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
 
-
-    }
-}
-
-@Composable
-fun FavouriteIcon() {
-
-    IconButton(
-        onClick = { /*TODO*/ }
-    ) {
-        Icon(
-            imageVector = Icons.Filled.FavoriteBorder,
-            contentDescription = null
-        )
+        IconButton(
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(
+                imageVector = Icons.Filled.FavoriteBorder,
+                contentDescription = null
+            )
+        }
     }
 }
 

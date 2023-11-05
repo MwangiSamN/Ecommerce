@@ -9,4 +9,10 @@
     <string name="waxing_shop">Waxing Shop</string>
     <string name="product_details">Product Details</string>
     <string name="product_description_1">BeauTome Consumer Grade Hard Wax is a flexible wax that makes waxing quick and easy. The creamy wax grips the hair follicle removing it clean away. The high-performance wax is suitable for hair removal from all areas of the body and its flexible formula makes it great for ease of use when intimate waxing. This high-performance wax is suitable for all areas of the body.</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="proceed_to_checkout">Proceed to Checkout</string>
+    <string name="add_more_items">Add Items</string>
+    <string name="checkout_screen">Checkout</string>
+    <string name="place_order">Place Order</string>
+    <string name="update_order">Update Order Items</string>
 </resources>

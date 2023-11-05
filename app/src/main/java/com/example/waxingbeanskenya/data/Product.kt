@@ -26,7 +26,7 @@ val products = listOf(
     ),
     Product(
         2,
-        R.drawable.rose100,
+        R.drawable.lavendar500_2,
         R.string.product_name_3,
         R.string.product_price_3
     ),
@@ -44,7 +44,7 @@ val products = listOf(
     ),
     Product(
         6,
-        R.drawable.rose100,
+        R.drawable.lavendar500_2,
         R.string.product_name_3,
         R.string.product_price_3
     ),
@@ -68,7 +68,7 @@ val products = listOf(
     ),
     Product(
         10,
-        R.drawable.rose100,
+        R.drawable.lavendar500_2,
         R.string.product_name_3,
         R.string.product_price_3
     ),
@@ -86,7 +86,7 @@ val products = listOf(
     ),
     Product(
         13,
-        R.drawable.rose100,
+        R.drawable.lavendar500_2,
         R.string.product_name_3,
         R.string.product_price_3
     ),
@@ -104,7 +104,7 @@ val products = listOf(
     ),
     Product(
         16,
-        R.drawable.rose100,
+        R.drawable.lavendar500_2,
         R.string.product_name_3,
         R.string.product_price_3
     )

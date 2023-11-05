@@ -68,7 +68,11 @@ fun ProductDetailPage(
         },
 
         floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(Screen.ShoppingCart.route)
+                }
+            ) {
                 androidx.compose.material3.Icon(
                     imageVector = Icons.Outlined.ShoppingCart,
                     contentDescription = null)
