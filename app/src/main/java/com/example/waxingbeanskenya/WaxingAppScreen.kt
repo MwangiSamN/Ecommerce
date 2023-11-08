@@ -32,7 +32,7 @@ fun WaxingBeansApp(
             WaxingTopBar()
         },
         bottomBar = {
-            WaxingNavigationBar()
+            WaxingNavigationBar(navController = navController)
         }
     ) {
             it ->

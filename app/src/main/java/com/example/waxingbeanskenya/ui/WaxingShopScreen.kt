@@ -88,7 +88,7 @@ fun ProductItem(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(300.dp)
+            .height(260.dp)
             .clickable {
                 navController.navigate(route = Screen.ProductDetail.route)
             }
@@ -100,7 +100,9 @@ fun ProductItem(
                 .fillMaxSize()
         ) {
 
-            Column() {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
                 ProductImage(
                     productImage = product.imageResourceId
@@ -124,10 +126,10 @@ fun ProductImage(
         Box {
             Image(
                 modifier = Modifier
-                    .height(220.dp)
+                    .height(200.dp)
                     .padding(dimensionResource(id = R.dimen.padding_small))
                     .clip(MaterialTheme.shapes.medium),
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 painter = painterResource(productImage),
                 contentDescription = null
             )
@@ -179,7 +181,9 @@ data class BottomNavigationItem(
 )
 
 @Composable
-fun WaxingNavigationBar(){
+fun WaxingNavigationBar(
+    navController: NavController
+){
     var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
 
 
@@ -197,7 +201,7 @@ fun WaxingNavigationBar(){
         BottomNavigationItem(
             title = "My Account",
             selectedIcon = Icons.Filled.AccountCircle,
-            unselectedIcon = Icons.Outlined.AccountCircle
+            unselectedIcon = Icons.Outlined.AccountCircle,
         )
     )
 
@@ -205,7 +209,15 @@ fun WaxingNavigationBar(){
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 selected = selectedItemIndex == index,
-                onClick = { selectedItemIndex = index },
+                onClick = {
+                            if (item.title == "My Account") {
+                                navController.navigate(Screen.AccountScreen.route){
+                                    popUpTo(Screen.WaxingShop.route){
+                                        inclusive = true
+                                    }
+                                }
+                            }
+                          },
                 label = { Text(item.title) },
                 icon = {
                     Icon(

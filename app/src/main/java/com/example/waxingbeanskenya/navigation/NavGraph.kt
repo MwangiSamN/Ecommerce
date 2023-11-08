@@ -6,8 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.waxingbeanskenya.WaxingBeansApp
+import com.example.waxingbeanskenya.ui.AccountScreen
 import com.example.waxingbeanskenya.ui.CheckoutScreen
 import com.example.waxingbeanskenya.ui.ProductDetailPage
+import com.example.waxingbeanskenya.ui.SettingsScreen
 import com.example.waxingbeanskenya.ui.ShoppingCartScreen
 
 @Composable
@@ -23,20 +25,35 @@ fun SetupNavGraph(
         ){
             WaxingBeansApp(navController = navController)
         }
+
         composable(
             route = Screen.ProductDetail.route
         ){
             ProductDetailPage(navController = navController)
         }
+
         composable(
             route = Screen.ShoppingCart.route
         ){
             ShoppingCartScreen(navController = navController)
         }
+
         composable(
             route = Screen.CheckoutScreen.route
         ){
             CheckoutScreen(navController = navController)
+        }
+
+        composable(
+            route = Screen.AccountScreen.route
+        ){
+            AccountScreen(navController = navController)
+        }
+
+        composable(
+            route = Screen.SettingsScreen.route
+        ){
+            SettingsScreen(navController = navController)
         }
     }
 }

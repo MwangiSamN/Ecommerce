@@ -80,7 +80,7 @@ fun CheckoutTopBar(
                 onClick = {
                     navController.navigate(Screen.ShoppingCart.route){
                         popUpTo(Screen.ProductDetail.route){
-                            inclusive = true
+                            inclusive = false
                         }
                     }
                 }
@@ -97,7 +97,7 @@ fun CheckoutTopBar(
             elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
         ) {
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(Screen.AccountScreen.route) }
             ) {
                 Icon(
                     imageVector = Icons.Outlined.AccountCircle,

@@ -5,4 +5,6 @@ sealed class Screen(val route: String){
     object ProductDetail: Screen(route = "product_detail_screen")
     object ShoppingCart: Screen(route = "shopping_cart_screen")
     object CheckoutScreen: Screen(route = "checkout_screen")
+    object AccountScreen: Screen(route = "account_screen")
+    object SettingsScreen: Screen(route = "settings_screen")
 }

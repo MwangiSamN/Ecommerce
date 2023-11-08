@@ -117,7 +117,7 @@ fun CartTopBar(
             elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
         ) {
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(Screen.AccountScreen.route) }
             ) {
                 Icon(
                     imageVector = Icons.Outlined.AccountCircle,
@@ -149,7 +149,7 @@ fun ShoppingCartTitle() {
                 imageVector = Icons.Outlined.Delete,
                 contentDescription = null,
                 tint = androidx.compose.ui.graphics.Color.Red,
-                modifier = Modifier.size(width = 30.dp, height = 30.dp),
+                modifier = Modifier.size(width = 25.dp, height = 25.dp),
             )
         }
     }
@@ -219,11 +219,11 @@ fun CartItemModification() {
     Surface(
         shape = RoundedCornerShape(50.dp),
         modifier = Modifier
-            .size(width = 100.dp, height = 30.dp),
+            .size(width = 90.dp, height = 35.dp),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.End
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             IconButton(
                 onClick = { /*TODO*/ }
