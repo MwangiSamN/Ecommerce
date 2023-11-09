@@ -112,3 +112,4 @@ fun WaxingBeansKenyaTheme(
         content = content
     )
 }
+

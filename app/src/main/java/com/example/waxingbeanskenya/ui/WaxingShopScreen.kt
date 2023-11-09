@@ -213,7 +213,7 @@ fun WaxingNavigationBar(
                             if (item.title == "My Account") {
                                 navController.navigate(Screen.AccountScreen.route){
                                     popUpTo(Screen.WaxingShop.route){
-                                        inclusive = true
+                                        inclusive = false
                                     }
                                 }
                             }

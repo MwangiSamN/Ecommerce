@@ -48,6 +48,7 @@ fun SetupNavGraph(
             route = Screen.AccountScreen.route
         ){
             AccountScreen(navController = navController)
+
         }
 
         composable(

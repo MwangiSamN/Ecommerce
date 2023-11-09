@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,28 +24,37 @@ import com.example.waxingbeanskenya.R
 import com.example.waxingbeanskenya.navigation.Screen
 import com.example.waxingbeanskenya.ui.theme.WaxingBeansKenyaTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(navController: NavController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Icon(
-            imageVector = Icons.Outlined.Settings,
-            contentDescription = null,
-            modifier = Modifier
-                .size(100.dp)
-                .clickable {
-                    navController.navigate(Screen.WaxingShop.route)
-                }
-        )
+    Scaffold(
+        content = {it
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Settings,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(100.dp)
+                        .clickable {
+                            navController.navigate(Screen.AccountScreen.route){
+                                popUpTo(Screen.AccountScreen.route){
+                                    inclusive = true
+                                }
+                            }
+                        }
+                )
 
-        Text(
-            text = stringResource(R.string.settings),
-            style = MaterialTheme.typography.labelLarge
-        )
-    }
+                Text(
+                    text = stringResource(R.string.settings),
+                    style = MaterialTheme.typography.labelLarge
+                )
+            }
+        },
+    )
 }
 
 @Preview(showBackground = true)

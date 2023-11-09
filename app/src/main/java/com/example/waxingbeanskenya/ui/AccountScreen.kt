@@ -1,6 +1,11 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.waxingbeanskenya.ui
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,7 +13,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,9 +21,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.KeyboardArrowLeft
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.Settings
@@ -30,14 +36,19 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -66,7 +77,6 @@ fun AccountScreen(
                 FavOrdersCards()
                 AccountContent()
             }
-
         }
     )
 }
@@ -89,7 +99,11 @@ fun AccountScreenTopBar(
         ) {
             IconButton(
                 onClick = {
-                    navController.navigate(Screen.SettingsScreen.route)
+                    navController.navigate(Screen.SettingsScreen.route){
+                        popUpTo(Screen.WaxingShop.route){
+                            inclusive = false
+                        }
+                    }
                 },
             ) {
                 Icon(
@@ -102,8 +116,11 @@ fun AccountScreenTopBar(
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileThumbNail() {
+
+
 
     Box(
         modifier = Modifier
@@ -111,27 +128,106 @@ fun ProfileThumbNail() {
             .background(MaterialTheme.colorScheme.surfaceTint, CircleShape)
 
     ) {
+
+        val sheetState = rememberModalBottomSheetState()
+        var isSheetOpen by rememberSaveable {
+            mutableStateOf(false)
+        }
+
+        if (isSheetOpen){
+            ModalBottomSheet(
+                sheetState = sheetState,
+                onDismissRequest = { isSheetOpen = false },
+                modifier = Modifier.height(200.dp),
+                tonalElevation = 5.dp
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Row {
+                        Text(
+                            text = "Edit Profile",
+                            style = MaterialTheme.typography.labelLarge,
+
+                        )
+                    }
+
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(top = 16.dp),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(imageVector = Icons.Outlined.Face, contentDescription = null)
+                            Text(text = "Camera")
+                        }
+
+                        Column(
+                            modifier = Modifier.padding(top = 16.dp),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(imageVector = Icons.Outlined.Edit, contentDescription = null)
+                            Text(text = "Username")
+                        }
+
+                        Column(
+                            modifier = Modifier.padding(top = 16.dp),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(imageVector = Icons.Outlined.Email, contentDescription = null)
+                            Text(text = "Email")
+                        }
+
+                        Column(
+                            modifier = Modifier.padding(top = 16.dp),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(imageVector = Icons.Outlined.Call, contentDescription = null)
+                            Text(text = "Number")
+                        }
+                    }
+                }
+
+            }
+        }
+
         Icon(
             imageVector = Icons.Outlined.AccountCircle,
             contentDescription = null,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .size(150.dp)
+                .align(Alignment.Center)
         )
 
         Box(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.surface, CircleShape)
+                .size(60.dp)
+                .background(MaterialTheme.colorScheme.secondary, CircleShape)
                 .align(Alignment.BottomEnd)
-                .size(50.dp)
+                .border(
+                    width = 7.dp,
+                    color = MaterialTheme.colorScheme.background,
+                    shape = CircleShape
+                )
+
         ) {
             IconButton(
-                onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
+                onClick = {
+                          isSheetOpen = true
+                },
+                modifier = Modifier.align(Alignment.Center)
+
 
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Edit,
-                    contentDescription = null
+                    contentDescription = null,
+
                 )
             }
         }
@@ -157,7 +253,7 @@ fun FavOrdersCards() {
             onClick = { /*TODO*/ },
             modifier = Modifier
                 .width(160.dp)
-                .height(70.dp),
+                .height(60.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
         ) {
             Column(
@@ -178,7 +274,7 @@ fun FavOrdersCards() {
             onClick = { /*TODO*/ },
             modifier = Modifier
                 .width(160.dp)
-                .height(70.dp),
+                .height(60.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
         ) {
             Column(
@@ -259,6 +355,7 @@ fun AccountContent() {
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
