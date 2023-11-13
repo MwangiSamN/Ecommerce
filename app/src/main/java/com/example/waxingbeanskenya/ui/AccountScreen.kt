@@ -66,16 +66,23 @@ fun AccountScreen(
         topBar = {
             AccountScreenTopBar(navController = navController)
         },
+        bottomBar = {
+                    WaxingNavigationBar(navController = navController)
+        },
         content = {it
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 80.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                ProfileThumbNail()
-                FavOrdersCards()
-                AccountContent()
+            Box {
+                Column(
+                    modifier = Modifier
+                        .padding(top = 80.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    ProfileThumbNail()
+                    FavOrdersCards()
+                    AccountContent(navController = navController)
+                }
+
+
+
             }
         }
     )
@@ -119,9 +126,6 @@ fun AccountScreenTopBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileThumbNail() {
-
-
-
     Box(
         modifier = Modifier
             .size(200.dp)
@@ -207,7 +211,7 @@ fun ProfileThumbNail() {
         Box(
             modifier = Modifier
                 .size(60.dp)
-                .background(MaterialTheme.colorScheme.secondary, CircleShape)
+                .background(MaterialTheme.colorScheme.surfaceTint, CircleShape)
                 .align(Alignment.BottomEnd)
                 .border(
                     width = 7.dp,
@@ -301,14 +305,18 @@ fun FavOrdersCards() {
 }
 
 @Composable
-fun AccountContent() {
+fun AccountContent(
+    navController: NavController
+) {
     Column(
         modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.Start
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.clickable {  }
+            modifier = Modifier.clickable {
+                navController.navigate(Screen.SettingsScreen.route)
+            }
         ) {
             Icon(imageVector = Icons.Outlined.Settings, contentDescription = null)
 

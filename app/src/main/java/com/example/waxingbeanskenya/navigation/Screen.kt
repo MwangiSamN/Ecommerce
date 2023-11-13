@@ -7,4 +7,5 @@ sealed class Screen(val route: String){
     object CheckoutScreen: Screen(route = "checkout_screen")
     object AccountScreen: Screen(route = "account_screen")
     object SettingsScreen: Screen(route = "settings_screen")
+    object CategoriesScreen: Screen(route = "categories_screen")
 }

@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.waxingbeanskenya.WaxingBeansApp
 import com.example.waxingbeanskenya.ui.AccountScreen
+import com.example.waxingbeanskenya.ui.CategoriesScreen
 import com.example.waxingbeanskenya.ui.CheckoutScreen
 import com.example.waxingbeanskenya.ui.ProductDetailPage
 import com.example.waxingbeanskenya.ui.SettingsScreen
@@ -55,6 +56,12 @@ fun SetupNavGraph(
             route = Screen.SettingsScreen.route
         ){
             SettingsScreen(navController = navController)
+        }
+        
+        composable(
+            route = Screen.CategoriesScreen.route
+        ){
+            CategoriesScreen(navController = navController)
         }
     }
 }

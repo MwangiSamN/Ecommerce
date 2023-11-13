@@ -73,7 +73,7 @@ fun WaxingTopBar(modifier: Modifier = Modifier) {
             }
         },
         colors = TopAppBarDefaults.mediumTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primary
         ),
         modifier = modifier
     )
@@ -205,7 +205,9 @@ fun WaxingNavigationBar(
         )
     )
 
-    NavigationBar {
+    NavigationBar(
+        modifier = Modifier.height(80.dp)
+    ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 selected = selectedItemIndex == index,
@@ -216,7 +218,14 @@ fun WaxingNavigationBar(
                                         inclusive = false
                                     }
                                 }
+                            };
+                    if (item.title == "Category") {
+                        navController.navigate(Screen.CategoriesScreen.route){
+                            popUpTo(Screen.WaxingShop.route){
+                                inclusive = false
                             }
+                        }
+                    }
                           },
                 label = { Text(item.title) },
                 icon = {
@@ -251,3 +260,4 @@ fun WaxingDarkThemePreview() {
         WaxingBeansApp(navController = rememberNavController())
     }
 }
+

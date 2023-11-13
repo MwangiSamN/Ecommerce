@@ -18,10 +18,12 @@ import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -260,12 +262,11 @@ fun ShoppingCartOutlineButtons(
         modifier = Modifier
             .padding(8.dp)
     ) {
-        OutlinedButton(
+        Button(
             onClick = {
                       navController.navigate(Screen.CheckoutScreen.route)
             },
             shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(),
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(

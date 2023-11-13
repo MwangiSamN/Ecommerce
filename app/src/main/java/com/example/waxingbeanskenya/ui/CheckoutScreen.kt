@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -126,11 +127,10 @@ fun CheckoutOutlinedButtons(
     Column(
         modifier = Modifier.padding(8.dp)
     ) {
-        OutlinedButton(
+        Button(
             onClick = { /*TODO*/ },
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors()
+            shape = RoundedCornerShape(12.dp)
         ) {
             Text(
                 text = stringResource(R.string.place_order)
